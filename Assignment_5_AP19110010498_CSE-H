@@ -203,6 +203,7 @@ int main() {
 
 4. write a c program for insertion and deletion of BST.
 
+
 #include<stdlib.h>
 #include<stdio.h>
 
@@ -266,6 +267,16 @@ void print_postorder(node * tree)
     }
 }
 
+void deltree(node * tree)
+{
+    if (tree)
+    {
+        deltree(tree->left);
+        deltree(tree->right);
+        free(tree);
+    }
+}
+
 node* search(node ** tree, int val)
 {
     if(!(*tree))
@@ -324,5 +335,6 @@ void main()
         printf("Data Not found in tree.\n");
     }
 
+    /* Deleting all nodes of tree */
+    deltree(root);
 }
-
