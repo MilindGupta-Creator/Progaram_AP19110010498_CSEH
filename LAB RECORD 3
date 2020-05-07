@@ -1,0 +1,225 @@
+1. Write a program for the Insertion sort algorithm.
+
+#include<stdio.h>
+int main()
+{
+   int i, j, count, temp, number[50];
+
+   printf("Enter the list of numbers in the array ");
+   scanf("%d",&count);
+
+   printf("Enter %d elements: ", count);
+   // This loop would store the input numbers in array
+   for(i=0;i<count;i++)
+      scanf("%d",&number[i]);
+
+   // Implementation of insertion sort algorithm
+   for(i=1;i<count;i++){
+      temp=number[i];
+      j=i-1;
+      while((temp<number[j])&&(j>=0)){
+         number[j+1]=number[j];
+         j=j-1;
+      }
+      number[j+1]=temp;
+   }
+
+   printf("Order of Sorted elements in the ascending order is :");
+   for(i=0;i<count;i++)
+      printf(" %d",number[i]);
+
+   return 0;
+}
+
+Output:
+Enter the list of numbers in the array 5                                                                          
+Enter 5 elements: 3                                                                                               
+67                                                                                                                
+54                                                                                                                
+9                                                                                                                 
+32                                                                                                                
+Order of Sorted elements in the ascending order is : 3 9 32 54 67 
+
+
+2. Write a program for the Selection sort algorithm.
+
+#include <stdio.h>
+void main()
+{
+int a[100], n, i, j, position, temp;
+printf("Enter the number of elements in the array:\n");
+scanf("%d", &n);
+printf("Enter %d integer elements in the array\n",n);
+for (i= 0;i<n;i++)
+{
+scanf("%d",&a[i]);
+}
+for (i=0;i<(n-1);i++)
+{
+position=i;
+for (j=i+1;j<n;j++)
+{
+if (a[position]>a[j])
+position=j;
+}
+if (position!=i)
+{
+temp=a[i];
+a[i]=a[position];
+a[position]=temp;
+}
+}
+printf("Sorted the array in ascending order:\n");\
+for (i=0;i<n;i++)
+{
+printf("%d\n",a[i]);
+}
+}
+
+Output:
+Enter the number of elements in the array:                                                                        
+5                                                                                                                 
+Enter 5 integer elements in the array                                                                             
+45                                                                                                                
+68                                                                                                                
+3                                                                                                                 
+41                                                                                                                
+5                                                                                                                 
+Sorted the array in ascending order:                                                                              
+3                                                                                                                 
+5                                                                                                                 
+41                                                                                                                
+45   
+
+3. Write a program for Bubble sort algorithm.
+
+#include <stdio.h>
+
+void bubbleSort(int arr[], int n)
+{
+    int i, j, temp;
+    for(i = 0; i < n; i++)
+    {
+        for(j = 0; j < n-i-1; j++)
+        {
+            if( arr[j] > arr[j+1])
+            {
+                // swap the elements
+                temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            } 
+        }
+    }
+    
+    // print the sorted array
+    printf("Sorted Array: ");
+    for(i = 0; i < n; i++)
+    {
+        printf("%d  ", arr[i]);
+    }
+}
+
+int main()
+{
+    int arr[100], i, n, step, temp;
+    // ask user for number of elements to be sorted
+    printf("Enter the number of elements to be sorted: ");
+    scanf("%d", &n);
+    for(i = 0; i < n; i++)
+    {
+        printf("Enter element no. %d: ", i+1);
+        scanf("%d", &arr[i]);
+    }
+    // call the function bubbleSort
+    bubbleSort(arr, n);
+    
+    return 0;
+}
+
+Output:
+
+Enter the number of elements to be sorted: 5                                                                      
+Enter element no. 1: 2                                                                                            
+Enter element no. 2: 34                                                                                           
+Enter element no. 3: 5                                                                                            
+Enter element no. 4: 79                                                                                           
+Enter element no. 5: 43                                                                                           
+Sorted Array: 2  5  34  43  79 
+
+
+4: Write a program for the Merge sort algorithm.
+
+#include<stdio.h>
+ 
+void mergesort(int a[],int i,int j);
+void merge(int a[],int i1,int j1,int i2,int j2);
+ 
+int main()
+{
+	int a[30],n,i;
+	printf("Enter no of elements:");
+	scanf("%d",&n);
+	printf("Enter array elements:");
+	
+	for(i=0;i<n;i++)
+		scanf("%d",&a[i]);
+		
+	mergesort(a,0,n-1);
+	
+	printf("\nSorted array is :");
+	for(i=0;i<n;i++)
+		printf("%d ",a[i]);
+		
+	return 0;
+}
+ 
+void mergesort(int a[],int i,int j)
+{
+	int mid;
+		
+	if(i<j)
+	{
+		mid=(i+j)/2;
+		mergesort(a,i,mid);		//left recursion
+		mergesort(a,mid+1,j);	//right recursion
+		merge(a,i,mid,mid+1,j);	//merging of two sorted sub-arrays
+	}
+}
+ 
+void merge(int a[],int i1,int j1,int i2,int j2)
+{
+	int temp[50];	//array used for merging
+	int i,j,k;
+	i=i1;	//beginning of the first list
+	j=i2;	//beginning of the second list
+	k=0;
+	
+	while(i<=j1 && j<=j2)	//while elements in both lists
+	{
+		if(a[i]<a[j])
+			temp[k++]=a[i++];
+		else
+			temp[k++]=a[j++];
+	}
+	
+	while(i<=j1)	//copy remaining elements of the first list
+		temp[k++]=a[i++];
+		
+	while(j<=j2)	//copy remaining elements of the second list
+		temp[k++]=a[j++];
+		
+	//Transfer elements from temp[] back to a[]
+	for(i=i1,j=0;i<=j2;i++,j++)
+		a[i]=temp[j];
+}
+
+Output:
+
+Enter array elements:343                                                                                          
+56                                                                                                                
+2                                                                                                                 
+675                                                                                                               
+5                                                                                                                 
+                                                                                                                  
+Sorted array is :2 5 56 343 675    
